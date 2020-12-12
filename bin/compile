@@ -5,9 +5,9 @@
 set -e
 
 # config
-APACHE_VERSION="2.2.22"
+APACHE_VERSION="2.4.46"
 APACHE_PATH="apache"
-PHP_VERSION="5.3.10"
+PHP_VERSION="7.4.13"
 PHP_PATH="php"
 
 BIN_DIR=$(dirname $0)
@@ -20,17 +20,17 @@ shopt -s dotglob
 
 cd $BUILD_DIR
 
-APACHE_URL="https://s3.amazonaws.com/php-lp/apache-$APACHE_VERSION.tar.gz"
+APACHE_URL="https://downloads.apache.org//httpd/httpd-2.4.46.tar.gz"
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
 
-PHP_URL="https://s3.amazonaws.com/php-lp/php-$PHP_VERSION.tar.gz"
+PHP_URL="https://www.php.net/distributions/php-7.4.13.tar.gz"
 echo "-----> Bundling PHP version $PHP_VERSION"
 curl --silent --max-time 60 --location "$PHP_URL" | tar xz
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
-cp $LP_DIR/conf/php.ini php
+# cp $LP_DIR/conf/php.ini php
 
 # make php available on bin
 mkdir -p bin
